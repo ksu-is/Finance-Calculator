@@ -1,6 +1,6 @@
 # Finance Calculator Project
 ## Here are the tasks required to complete this project
-- [ x] Create code repository for project - DONE
+- [x] Create code repository for project - DONE
 - [ ] Evaluate codebase located at https://github.com/rajatk16/npv-costbenefit-analysis/blob/master/Sudagade%20-%20Assignment4.py and choose which parts to incorporate into project
 - [ ] Decide which code to incorporate and merge code into new project
 - [ ] Create new codebase and define functions for how to solve certain finance math questions
