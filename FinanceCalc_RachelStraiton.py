@@ -4,5 +4,12 @@
 #This information will be used by the calculator to calculate the NPV
 #Then the program will make a decision ('yes' or 'no) as response to user
 
-from tkinter import *
+import tkinter
+top = tkinter.Tk()
 
+
+
+ #drop-down list of options for user input including:
+    #Initial Output (land,plant&equipment)
+    #Operating Cash Flows each year (separated by commas)
+    #Termination (Salvage) Value of project
