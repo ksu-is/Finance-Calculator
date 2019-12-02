@@ -6,10 +6,12 @@
 
 import tkinter
 top = tkinter.Tk()
-
+#Part 1: Calculating NPV
 
 
  #drop-down list of options for user input including:
     #Initial Output (land,plant&equipment)
     #Operating Cash Flows each year (separated by commas)
     #Termination (Salvage) Value of project
+top.title("NPV Calculator")
+top.mainloop()
