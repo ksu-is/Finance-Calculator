@@ -37,6 +37,25 @@ text = Text(root, width="10",height="1")
 
 text1 = Text(root, width="10",height="1")
 #text1.pack()
+text2 = Text(root, width="10",height="1")
+
+label_1 = Label(root, width="20",height="3",bg="#FB6395",text="Intial Outlay")
+label_2 = Label(root,width="20",height="3",bg="#9F26CF",text="Operating Cash Flow")
+label_3 = Label(root,width="20",height="3",bg="#2AA6FE",text="Terminal Value")
+
+button_1=Button(root,text="Net Present Value")
+
+label_1.grid(row=0,column=0)
+label_2.grid(row=1,column=0)
+label_3.grid(row=2,column=0)
+button_1.grid(row=3,column=2)
+
+text.grid(row=0, column=2)
+text1.grid(row=1, column=2)
+text2.grid(row=2, column=2)
+
+#app = Window(root)
+root.mainloop())
 
 label_1 = Label(root, width="20",height="3",bg="red",text="Intial Outlay")
 label_2 = Label(root,width="20",height="3",bg="blue",text="Operating Cash Flow")
