@@ -59,21 +59,26 @@ class Application(Frame):
         tv_answer = float(tv) * float(tv_3)
 
         final_answer = float(initialOutlay) + float(ocf_answer) + float(tv_answer)
-        
+        if final_answer >= 0:
+            self.yes = Label(self,width="20",height="3",bg="green",text="Yes, take the project.")
+            self.yes.grid(row=5,column=2,columnspan=2)
+        else:
+            self.no = Label(self,width="20",height="3",bg="red",text="No, do not take the project.")
+            self.no.grid(row=5,column=2,columnspan=2)
         self.answer.insert("0", final_answer)
         return
-
+        
     #NPV = IO + OCF x {[1-(1/(1+r)^n)]/r} + TV x [1/(1+r)^n]
 
     def create_widget(self):
         self.text_1 = Text(self, width="20",height="1")
-        self.text_1.grid(row=0, column=2, sticky="w")
+        self.text_1.grid(row=0, column=2)
 
         self.text_2 = Text(self, width="20",height="1")
-        self.text_2.grid(row=1, column=2, sticky="w")
+        self.text_2.grid(row=1, column=2)
 
         self.text_3 = Text(self, width="20",height="1")
-        self.text_3.grid(row=2, column=2, sticky="w")
+        self.text_3.grid(row=2, column=2)
 
         self.text_4 = Text(self, width="20",height="1")
         self.text_4.grid(row=0,column=5)
@@ -81,26 +86,26 @@ class Application(Frame):
         self.text_5 = Text(self, width="20",height="1")
         self.text_5.grid(row=1,column=5)
 
-        self.io = Label(self, width="20",height="3",bg="#FB6395",text="Intial Outlay")
-        self.io.grid(row=0,column=0, sticky="w")
+        self.io = Label(self, width="20",height="3",bg="#900C3F",text="Intial Outlay")
+        self.io.grid(row=0,column=0)
 
-        self.ocf = Label(self,width="20",height="3",bg="#9F26CF",text="Operating Cash Flow")
-        self.ocf.grid(row=1,column=0, sticky="w")
+        self.ocf = Label(self,width="20",height="3",bg="#C70039",text="Operating Cash Flow")
+        self.ocf.grid(row=1,column=0)
 
-        self.tv = Label(self,width="20",height="3",bg="#2AA6FE",text="Terminal Value")
-        self.tv.grid(row=2,column=0, sticky="w")
+        self.tv = Label(self,width="20",height="3",bg="#FF5733",text="Terminal Value")
+        self.tv.grid(row=2,column=0)
 
-        self.project = Label(self, width="20",height="3",bg="Orange",text="Length of Project")
-        self.project.grid(row=0,column=3, sticky="w")
+        self.project = Label(self, width="20",height="3",bg="#FFC300",text="Length of Project")
+        self.project.grid(row=0,column=3)
 
-        self.r = Label(self, width="20",height="3",bg="Yellow",text="Discount Rate (r)")
-        self.r.grid(row=1,column=3, sticky="w")
+        self.r = Label(self, width="20",height="3",bg="#DAF7A6",text="Discount Rate (r)")
+        self.r.grid(row=1,column=3)
 
-        self.button_1=Button(self,bg="grey",text="Net Present Value",command=self.calculate)
-        self.button_1.grid(row=5,column=2,columnspan=3)
+        self.button_1=Button(self,bg="#B5CFD8",text="Net Present Value $",command=self.calculate)
+        self.button_1.grid(row=2,column=3,columnspan=2)
 
-        self.answer = Entry(root,text="")
-        self.answer.grid(row=11,column=0)
+        self.answer = Entry(root,text="",font=("Courier New",25))
+        self.answer.grid(row=9,column=0)
 
 
 
@@ -109,3 +114,4 @@ root.geometry("600x400")
 root.resizable(0,0)
 app = Application(root)
 root.mainloop()
+
