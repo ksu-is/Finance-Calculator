@@ -5,70 +5,107 @@
 #Then the program will make a decision ('yes' or 'no) as response to user
 from tkinter import *
 
-class Window(Frame):
+class Application(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
+        self.grid()
         self.init_window()
-        
+        self.create_widget()
 
-        
     def init_window(self):
-        self.master.title("NPV Calc")
-        self.pack(fill=BOTH, expand=1)
+        self.master.title("NPV Calculator")
+        #self.pack(fill=BOTH, expand=1)
         menu = Menu(self.master)
         self.master.config(menu=menu)
         file = Menu(menu)
         file.add_command(label="Exit", command=self.client_exit)
         menu.add_cascade(label="File", menu=file)
         edit = Menu(menu)
-        edit.add_command(label="Undo")
-        menu.add_cascade(label="Edit",menu=edit)
-    
+        edit.add_command(label="Learn More",command=self.about_me)
+        menu.add_cascade(label="About",menu=edit)
+
+    def clear_widget(self,widget,widgets):
+        widget.destroy()    
+        widgets.destroy()
+        
+    def about_me(self):
+        self.about = Label(self, width="50",height="5",bg="#52EB7B", text="This is Rachel's Corporate Finance Calculator\n that makes it easy to solve for NPV!",font=("Courier New",12))
+        self.about.grid(row=10,column=0,columnspan=6)
+        self.about_btn = Button(self, width="5",height="1",text="X",command=lambda: self.clear_widget(self.about,self.about_btn))
+        self.about_btn.grid(row=9,column=5)
+
     def client_exit(self):
         exit()
-    
+        
+    def calculate(self):
+        self.answer.delete(0,END)
+        initialOutlay = self.text_1.get("1.0",END)
+        ocf = self.text_2.get("1.0",END)
+        tv = self.text_3.get("1.0",END)
+        n = self.text_4.get("1.0",END)
+        r = self.text_5.get("1.0",END)
+
+        ocf_1 = 1 + float(r)
+        ocf_2 = float(ocf_1) ** float(n)
+        ocf_3 = 1 / float(ocf_2)
+        ocf_4 = 1 - float(ocf_3)
+        ocf_5 = float(ocf_4) / float(r)
+        ocf_answer = float(ocf) * float(ocf_5)
+
+        tv_1 = 1 + float(r)
+        tv_2 = float(tv_1) ** float(n)
+        tv_3 = 1 / float(tv_2)
+        tv_answer = float(tv) * float(tv_3)
+
+        final_answer = float(initialOutlay) + float(ocf_answer) + float(tv_answer)
+        
+        self.answer.insert("0", final_answer)
+        return
+
+    #NPV = IO + OCF x {[1-(1/(1+r)^n)]/r} + TV x [1/(1+r)^n]
+
+    def create_widget(self):
+        self.text_1 = Text(self, width="20",height="1")
+        self.text_1.grid(row=0, column=2, sticky="w")
+
+        self.text_2 = Text(self, width="20",height="1")
+        self.text_2.grid(row=1, column=2, sticky="w")
+
+        self.text_3 = Text(self, width="20",height="1")
+        self.text_3.grid(row=2, column=2, sticky="w")
+
+        self.text_4 = Text(self, width="20",height="1")
+        self.text_4.grid(row=0,column=5)
+
+        self.text_5 = Text(self, width="20",height="1")
+        self.text_5.grid(row=1,column=5)
+
+        self.io = Label(self, width="20",height="3",bg="#FB6395",text="Intial Outlay")
+        self.io.grid(row=0,column=0, sticky="w")
+
+        self.ocf = Label(self,width="20",height="3",bg="#9F26CF",text="Operating Cash Flow")
+        self.ocf.grid(row=1,column=0, sticky="w")
+
+        self.tv = Label(self,width="20",height="3",bg="#2AA6FE",text="Terminal Value")
+        self.tv.grid(row=2,column=0, sticky="w")
+
+        self.project = Label(self, width="20",height="3",bg="Orange",text="Length of Project")
+        self.project.grid(row=0,column=3, sticky="w")
+
+        self.r = Label(self, width="20",height="3",bg="Yellow",text="Discount Rate (r)")
+        self.r.grid(row=1,column=3, sticky="w")
+
+        self.button_1=Button(self,bg="grey",text="Net Present Value",command=self.calculate)
+        self.button_1.grid(row=5,column=2,columnspan=3)
+
+        self.answer = Entry(root,text="")
+        self.answer.grid(row=11,column=0)
+
+
 
 root = Tk()
-root.geometry("400x300")
-
-text = Text(root, width="10",height="1")
-#text.pack()
-
-text1 = Text(root, width="10",height="1")
-#text1.pack()
-text2 = Text(root, width="10",height="1")
-
-label_1 = Label(root, width="20",height="3",bg="#FB6395",text="Intial Outlay")
-label_2 = Label(root,width="20",height="3",bg="#9F26CF",text="Operating Cash Flow")
-label_3 = Label(root,width="20",height="3",bg="#2AA6FE",text="Terminal Value")
-
-button_1=Button(root,text="Net Present Value")
-
-label_1.grid(row=0,column=0)
-label_2.grid(row=1,column=0)
-label_3.grid(row=2,column=0)
-button_1.grid(row=3,column=2)
-
-text.grid(row=0, column=2)
-text1.grid(row=1, column=2)
-text2.grid(row=2, column=2)
-
-#app = Window(root)
-root.mainloop())
-
-label_1 = Label(root, width="20",height="3",bg="red",text="Intial Outlay")
-label_2 = Label(root,width="20",height="3",bg="blue",text="Operating Cash Flow")
-
-button_1=Button(root,text="Click me")
-
-label_1.grid(row=0,column=0)
-label_2.grid(row=1,column=0)
-
-button_1.grid(row=2,column=2)
-
-text.grid(row=0, column=2)
-text1.grid(row=1, column=2)
-
-#app = Window(root)
+root.geometry("600x400")
+root.resizable(0,0)
+app = Application(root)
 root.mainloop()
